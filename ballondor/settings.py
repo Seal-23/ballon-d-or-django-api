@@ -12,13 +12,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-import mimetypes
-mimetypes.add_type("text/css", ".css", True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENVIRONMENT = os.environ.get('DJANGO_ENV', 'local')
 CORS_ORIGIN_ALLOW_ALL = True
-
+X_FRAME_OPTIONS = 'ALLOW-FROM http://35.208.235.249:8000/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
