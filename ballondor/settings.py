@@ -25,7 +25,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 SECRET_KEY = 'django-insecure-=+50zyr^2&shlg(#he0r0714muzv8t$h=+^m!c_gr&6fss-pyt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = ENVIRONMENT == 'local'
 
 ALLOWED_HOSTS = ['*']
 
@@ -139,12 +139,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-if not DEBUG:
-    STATIC_ROOT = ''
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -154,3 +155,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 2,
 }
+
+print(DEBUG)
+print(BASE_DIR)
