@@ -17,7 +17,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENVIRONMENT = os.environ.get('DJANGO_ENV', 'local')
 CORS_ORIGIN_ALLOW_ALL = True
-STATIC_ROOT = 'static'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -140,6 +139,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+if not DEBUG:
+    STATIC_ROOT = ''
+
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
