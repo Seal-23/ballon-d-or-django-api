@@ -15,6 +15,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ENVIRONMENT = os.environ.get('DJANGO_ENV', 'local')
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=+50zyr^2&shlg(#he0r0714muzv8t$h=+^m!c_gr&6fss-pyt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = ENVIRONMENT == 'local'
 
 ALLOWED_HOSTS = ['*']
 
@@ -98,9 +99,8 @@ ENVIRONMENT_DATABASE = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-database = os.environ.get('DJANGO_ENV', 'local')
 DATABASES = {
-    'default': ENVIRONMENT_DATABASE[database]
+    'default': ENVIRONMENT_DATABASE[ENVIRONMENT]
 }
 
 
