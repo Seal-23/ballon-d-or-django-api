@@ -26,8 +26,7 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
-    env:
-      DJANGO_ENV: test
+    
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
