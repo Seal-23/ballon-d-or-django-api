@@ -42,4 +42,3 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         SONAR_TOKEN: ${{ secrets.TOKEN_SONAR }}
       uses: sonarsource/sonarcloud-github-action@master
-  
