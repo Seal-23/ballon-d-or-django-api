@@ -37,4 +37,9 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+    - name: SonarCloud Scan
+        env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+            SONAR_TOKEN: ${{ secrets.TOKEN_SONAR }}
+        uses: sonarsource/sonarcloud-github-action@master
   
