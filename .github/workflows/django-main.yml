@@ -27,7 +27,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-lastest
-    
+    env:
+      DJANGO_ENV: test
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10

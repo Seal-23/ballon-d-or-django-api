@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'ballondor.apps.players'
+    'ballondor.apps.players',
 ]
 
 MIDDLEWARE = [
@@ -74,16 +74,23 @@ WSGI_APPLICATION = 'ballondor.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
+ENVIRONMENT_DATABASE = {
+    'local': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db',
         'USER': 'root',
         'PASSWORD': 'p4ssw0rd',
         'HOST': '0.0.0.0',
-        'PORT': '3310'
+        'PORT': '3310',
+    },
+    'test': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}
+database = os.environ.get('DJANGO_ENV', 'local')
+DATABASES = {
+    'default': ENVIRONMENT_DATABASE[database]
 }
 
 
@@ -131,6 +138,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 2,
-    
 }
-
