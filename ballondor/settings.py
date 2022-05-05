@@ -74,14 +74,24 @@ WSGI_APPLICATION = 'ballondor.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+DATABASE_PASSWORD = os.environ.get('DATABASE_PASSWORD','')
+
 ENVIRONMENT_DATABASE = {
+    'prod':{
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db',
+        'USER': 'root',
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': '104.154.246.179',
+        'PORT': '3306'
+    },
     'local': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db',
         'USER': 'root',
-        'PASSWORD': 'Nr1HFhFeEmPCvKC0',
-        'HOST': '104.154.246.179',
-        'PORT': '3306',
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': '0.0.0.0',
+        'PORT': '3310',
     },
     'test': {
         'ENGINE': 'django.db.backends.sqlite3',
