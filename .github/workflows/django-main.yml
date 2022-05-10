@@ -43,22 +43,20 @@ jobs:
       uses: sonarsource/sonarcloud-github-action@master
 
   deploy-to-gcloud:
-    needs: build
+    needs: test
     runs-on: ubuntu-latest
     steps:
-
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
-        with:
-          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
-
-      - id: 'gcloud'
-        name: 'gcloud'
-        run: |-
-          gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
-        run: |-
-          cd .. && ls -l
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
+    - name: 'gcp'
+      run: |-
+        cd .. && ls -l
