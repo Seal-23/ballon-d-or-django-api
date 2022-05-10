@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -27,7 +26,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+      uses: actio ns/setup-python@v3
       with:
         python-version: '3.10'
     - name: Install Dependencies
@@ -42,3 +41,24 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         SONAR_TOKEN: ${{ secrets.TOKEN_SONAR }}
       uses: sonarsource/sonarcloud-github-action@master
+
+  deploy-to-gcloud:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+
+      - id: 'gcloud'
+        name: 'gcloud'
+        run: |-
+          gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
+        run: |-
+          cd .. && ls -l
