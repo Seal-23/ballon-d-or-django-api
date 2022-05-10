@@ -46,6 +46,7 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v0'
@@ -56,7 +57,4 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-
-        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
-    - name: 'gcp'
-      run: |-
-        cd .. && ls -l
+        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public" --command "bash -s ${{ secrets.DATABASE_PASSWORD }} " < ./batch/deploy.sh
