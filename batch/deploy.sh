@@ -14,8 +14,10 @@ else
 fi
 if [ -d "./env" ]
 then
+    echo existeEnv
     . env/bin/activate
 else
+    echo NOexisteEnv
     python3 -m venv env
     . env/bin/activate
 fi
