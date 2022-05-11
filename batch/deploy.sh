@@ -11,6 +11,7 @@ then
 else
     git clone https://github.com/Seal-23/ballon-d-or-django-api.git
     cd ballon-d-or-django-api
+    ls
 fi
 if [ -d "./env" ]
 then
