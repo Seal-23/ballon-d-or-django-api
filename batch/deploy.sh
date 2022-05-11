@@ -3,6 +3,7 @@ gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "b
 export DJANGO_ENV=prod
 export DATABASE_PASSWORD=$1
 echo $DATABASE_PASSWORD > ./test
+echo working
 if [ -d "./ballon-d-or-django-api" ]
 then
     cd ballon-d-or-django-api
@@ -13,16 +14,16 @@ else
 fi
 if [ -d "./env" ]
 then
-    source env/bin/activate
+    . env/bin/activate
 else
     python3 -m venv env
-    source env/bin/activate
+    . env/bin/activate
 fi
 pip install -r requirements.txt
-if ! [[ -d "./static" ]]
-then
-    python3 manage.py collectstatic
-fi
+# if ! [[ -d "./static" ]]
+# then
+python3 manage.py collectstatic
+# fi
 python3 manage.py migrate
 # if [ -f "./ballondor.pid" ]
 # then
