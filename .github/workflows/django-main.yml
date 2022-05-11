@@ -44,19 +44,18 @@ jobs:
 
   deploy-to-gcloud:
     needs: test
-    runMultipleCommands:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
-        with:
-          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
-      - id: 'gcloud'
-        name: 'gcloud'
-        run: |
-          gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
-          echo "GCP DONE"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |
+        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
+        echo "Hola"
