@@ -57,4 +57,4 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |-
-        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public" --command "bash -s" < ./batch/deploy.sh
+        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public" --command "bash -s ${{ secrets.DATABASE_PASSWORD }}" < cd .. && ls -l
