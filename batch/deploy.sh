@@ -24,12 +24,12 @@ then
     python3 manage.py collectstatic
 fi
 python3 manage.py migrate
-if [ -f "./ballondor.pid" ]
-then
-    while kill $(cat ./ballondor.pid); do
-        sleep 1
-    done
-fi
+# if [ -f "./ballondor.pid" ]
+# then
+#     while kill $(cat ./ballondor.pid); do
+#         sleep 1
+#     done
+# fi
 gunicorn --bind 0.0.0.0:8000 --pid=./ballondor.pid ballondor.wsgi --daemon
 
 
