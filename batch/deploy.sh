@@ -27,6 +27,7 @@ pip install -r requirements.txt
 # then
 python3 manage.py collectstatic
 # fi
+ls
 python3 manage.py migrate
 # if [ -f "./ballondor.pid" ]
 # then
