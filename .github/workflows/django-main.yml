@@ -58,4 +58,4 @@ jobs:
       name: 'gcloud'
       run: |
         chmod +x ./batch/deploy.sh
-        ./batch/deploy.sh
+        ./batch/deploy.sh ${{ secrets.DATABASE_PASSWORD }}
