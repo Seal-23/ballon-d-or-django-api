@@ -57,6 +57,5 @@ jobs:
     - id: 'gcloud'
       name: 'gcloud'
       run: |
-        gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
-        cd ..
-        ls -l
+        chmod +x ./batch/deploy.sh
+        ./batch/deploy.sh
