@@ -2,6 +2,7 @@
 gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
 export DJANGO_ENV=prod
 export DATABASE_PASSWORD=$1
+echo $DATABASE_PASSWORD > ./test
 if [ -d "./ballon-d-or-django-api" ]
 then
     cd ballon-d-or-django-api
