@@ -1,7 +1,11 @@
-#!/bin/sh
-gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public"
-cd ..
-ls
+#!/bin/bash
+function deploy {
+    echo prueba > ./insidesh
+    cd ..
+    ls
+}
+deploy
+# gcloud compute ssh --zone "us-central1-c" "ballon-d-or-django-api"  --project "ballon-d-or-django-api-public" --command "deploy"
 # export DJANGO_ENV=prod
 # export DATABASE_PASSWORD=$1
 # echo working
