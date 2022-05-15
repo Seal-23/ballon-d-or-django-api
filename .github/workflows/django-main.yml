@@ -60,4 +60,5 @@ jobs:
         gcloud builds submit --config=cloudbuild.yaml --substitutions=_DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}"
     - name: 'gcpdeploy-vm'
       run: |
+        gcloud config set run/region us-central1-c
         gcloud compute instances update-container ballon-d-or-vm --container-image gcr.io/ballon-d-or-django-api-public/ballon-d-or:latest
