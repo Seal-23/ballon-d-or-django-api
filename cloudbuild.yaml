@@ -1,0 +1,17 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '--build-arg',
+        'DATABASE_PASSWORD=${_DATABASE_PASSWORD}',
+        '-t',
+        'gcr.io/ballon-d-or-django-api-public/ballon-d-or',
+        '.',
+      ]
+substitutions:
+  _DATABASE_PASSWORD: _ # default value
+images:
+  [
+    'gcr.io/ballon-d-or-django-api-public/ballon-d-or',
+  ]

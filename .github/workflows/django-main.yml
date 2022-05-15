@@ -54,8 +54,10 @@ jobs:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
     - name: 'Set up Cloud SDK'
       uses: 'google-github-actions/setup-gcloud@v0'
-    - id: 'gcloud'
-      name: 'gcloud'
+    - name: 'gcpdeploy-container-image'
       run: |
-        chmod +x ./batch/deploy.sh
-        ./batch/deploy.sh ${{ secrets.DATABASE_PASSWORD }}
+        gcloud config set project ballon-d-or-django-api-public
+        gcloud builds submit --config=cloudbuild.yaml --substitutions=_DATABASE_PASSWORD="${{ secrets.DATABASE_PASSWORD }}"
+    - name: 'gcpdeploy-vm'
+      run: |
+        gcloud compute instances update-container ballon-d-or-vm --container-image gcr.io/ballon-d-or-django-api-public/ballon-d-or:latest
